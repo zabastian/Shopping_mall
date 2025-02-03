@@ -9,6 +9,7 @@ import java.util.Optional;
 @Repository
 public interface AuthRepository extends JpaRepository <User, Long> {
 
+    //이메일로 유저 조회
     Optional<User> findUserByEmail(String email);
 
 }
