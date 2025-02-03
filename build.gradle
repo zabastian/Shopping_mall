@@ -33,6 +33,8 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     //Bcrypt
     implementation 'at.favre.lib:bcrypt:0.10.2'
+    // JWT
+    implementation group: 'com.auth0', name: 'java-jwt', version: '3.3.0'
 }
 
 tasks.named('test') {
