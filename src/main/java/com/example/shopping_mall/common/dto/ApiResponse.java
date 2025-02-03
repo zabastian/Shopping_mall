@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 public class ApiResponse <T> {
 
     private String status;
-    private String Message;
+    private String message;
     private T data;
 
 
