@@ -31,6 +31,12 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    //Bcrypt
+    implementation 'at.favre.lib:bcrypt:0.10.2'
+    // JWT
+    implementation group: 'com.auth0', name: 'java-jwt', version: '3.3.0'
+    //Validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {
