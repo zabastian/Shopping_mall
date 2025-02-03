@@ -29,7 +29,7 @@ public class LoginCheckFilter implements Filter {
 
         //WhiteList에 있는 경로는 필터 건너뜀
         log.info("필터 적용 경로 → " + "[" + "{}" + "]", requestURI); // whiteList 경로인지 확인
-        if(whiteList.contains(requestURI)) {
+        if(whiteList.contains(requestURI)) { //contains -> 주어진 요소가 리스트 등에 포함되어 있는지 확인하는 메서드(있으면 ture)
             log.info("필터가 적용되지 않았습니다.");
             filterChain.doFilter(servletRequest,servletResponse);
             return;
@@ -44,7 +44,6 @@ public class LoginCheckFilter implements Filter {
                 httpServletResponse.getWriter().write("Authorization 헤더를 확인해주세요.");
                 return;
             }
-
         }
 
         // 다음 필터로 전달
