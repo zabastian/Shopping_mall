@@ -5,12 +5,13 @@ import com.example.shopping_mall.auth.dto.request.UserLoginRequestDto;
 import com.example.shopping_mall.auth.dto.response.UserCreateResponseDto;
 import com.example.shopping_mall.auth.dto.response.UserLoginResponseDto;
 import com.example.shopping_mall.auth.repository.AuthRepository;
-import com.example.shopping_mall.common.config.PasswordEncoder;
+import com.example.shopping_mall.common.config.PasswordEncoder;import com.example.shopping_mall.auth.jwt.JwtUtil;
 import com.example.shopping_mall.entity.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import java.io.UnsupportedEncodingException;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +19,7 @@ public class AuthService {
 
     private final AuthRepository authRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     //회원가입
     public UserCreateResponseDto createUser (UserCreateRequestDto requestDto) {
@@ -39,7 +41,7 @@ public class AuthService {
     }
 
     //로그인
-    public UserLoginResponseDto loginUser(UserLoginRequestDto requestDto) {
+    public UserLoginResponseDto loginUser(UserLoginRequestDto requestDto) throws UnsupportedEncodingException {
 
         // 이메일 확인
         User foundUser = authRepository.findUserByEmail(requestDto.getEmail())
@@ -50,6 +52,9 @@ public class AuthService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"비밀번호를 다시 입력해주세요.");
         }
 
-        return new UserLoginResponseDto(foundUser.getUserId(), foundUser.getEmail(),"token");
+        // 토큰 생성
+        String token = jwtUtil.createToken(foundUser.getUserId());
+
+        return new UserLoginResponseDto(foundUser.getUserId(), foundUser.getEmail(), token);
     }
 }

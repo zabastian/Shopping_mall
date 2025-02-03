@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.io.UnsupportedEncodingException;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -33,7 +34,7 @@ public class AuthController {
 
     //로그인
     @PostMapping("/log-in")
-    public ResponseEntity<ApiResponse<UserLoginResponseDto>> loginUserAPI (@RequestBody UserLoginRequestDto requestDto) {
+    public ResponseEntity<ApiResponse<UserLoginResponseDto>> loginUserAPI (@RequestBody UserLoginRequestDto requestDto) throws UnsupportedEncodingException {
 
         UserLoginResponseDto responseDto = authService.loginUser(requestDto);
 
