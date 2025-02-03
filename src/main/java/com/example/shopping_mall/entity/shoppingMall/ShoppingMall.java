@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Getter
 @Entity
 @NoArgsConstructor
+@Table(name = "shopping_mall")
 public class ShoppingMall {
 
     @Id
@@ -30,7 +31,7 @@ public class ShoppingMall {
     private String operatorEmail; // 운영자이메일
 
     @Column(name = "e_commerce_license")
-    private int eCommerceLicense; // 통신판매번호
+    private Integer eCommerceLicense; // 통신판매번호
 
     @Column(name = "business_type", length = 50)
     private String businessType; // 영업형태
@@ -98,7 +99,7 @@ public class ShoppingMall {
     @Column(name = "withdrawal_shipping_fee", length = 50)
     private String withdrawalShippingFee; // 철회시배송비부담여부
 
-    @Column(name = "customer_complaInt_board", length = 50)
+    @Column(name = "customer_complaint_board", length = 50)
     private String customerComplaintBoard; // 고객불만게시판운영
 
     @Column(name = "membership_cancellation", length = 50)
