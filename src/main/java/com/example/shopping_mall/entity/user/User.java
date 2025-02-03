@@ -17,5 +17,11 @@ public class User {
     private Long userId;
     private String email;
     private String password;
+
+    // 유저 생성
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }
 
