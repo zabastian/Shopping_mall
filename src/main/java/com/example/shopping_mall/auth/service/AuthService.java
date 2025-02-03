@@ -38,4 +38,18 @@ public class AuthService {
         return new UserCreateResponseDto(savedUser.getUserId(), savedUser.getEmail());
     }
 
+    //로그인
+    public UserLoginResponseDto loginUser(UserLoginRequestDto requestDto) {
+
+        // 이메일 확인
+        User foundUser = authRepository.findUserByEmail(requestDto.getEmail())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "해당 이메일을 가진 유저를 찾을 수 없습니다."));
+
+        // 비밀번호 확인
+        if(!passwordEncoder.matches(requestDto.getPassword(),foundUser.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"비밀번호를 다시 입력해주세요.");
+        }
+
+        return new UserLoginResponseDto(foundUser.getUserId(), foundUser.getEmail(),"token");
+    }
 }

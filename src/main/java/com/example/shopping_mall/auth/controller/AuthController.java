@@ -30,4 +30,13 @@ public class AuthController {
         return new ResponseEntity<>(new ApiResponse<>(HttpStatus.CREATED.toString(), "회원가입이 완료되었습니다.", responseDto), HttpStatus.CREATED);
     }
 
+
+    //로그인
+    @PostMapping("/log-in")
+    public ResponseEntity<ApiResponse<UserLoginResponseDto>> loginUserAPI (@RequestBody UserLoginRequestDto requestDto) {
+
+        UserLoginResponseDto responseDto = authService.loginUser(requestDto);
+
+        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK.toString(), "로그인이 완료되었습니다.",responseDto));
+    }
 }
