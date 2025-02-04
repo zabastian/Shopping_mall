@@ -5,6 +5,8 @@ import com.example.shopping_mall.shoppingMall.dto.ShoppingMallDto;
 import com.example.shopping_mall.shoppingMall.repository.ShoppingMallRepository;
 import jakarta.validation.constraints.Null;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,5 +49,20 @@ public class ShoppingMallService {
                         shoppingMall.getFirstReportDate(),
                         shoppingMall.getMonitoringDate()))
                 .collect(Collectors.toList());
+    }
+
+    // 전체평가 점수 조회 + 업소상태 조회(페이지네이션 적용)
+    public List<ShoppingMallDto> shoppingMallSummaryPage(Pageable pageable, Integer overallRating, String businessStatus) {
+
+        //페이징 처리 된 쇼핑몰 데이터 조회
+        Page<ShoppingMall> shoppingMallPage = shoppingMallRepository.findAllByOverallRatingAndBusinessStatusOrderByMonitoringDateDesc(overallRating, businessStatus, pageable);
+
+        //getContent -> 입력받은 page값에 해당하는 데이터 목록을 List형태로 변환
+        List<ShoppingMall> shoppingMalls = shoppingMallPage.getContent();
+
+        //ShoppingMall -> ShoppingMallDto로 변환
+        List<ShoppingMallDto> shoppingMallDtos = convertToDtoList(shoppingMalls);
+
+        return shoppingMallDtos;
     }
 }
