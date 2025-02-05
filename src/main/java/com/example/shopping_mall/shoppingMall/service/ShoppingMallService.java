@@ -47,9 +47,9 @@ public class ShoppingMallService {
     }
 
     // 전체평가 점수 조회 + 업소상태 조회(페이지네이션 적용)
-    public List<ShoppingMallDto> shoppingMallSummaryPage(Pageable pageable, Integer overallRating, String businessStatus) {
+    public List<ShoppingMallDto> pageShoppingMallSummary(Pageable pageable, Integer overallRating, String businessStatus) {
 
-        //페이징 처리 된 쇼핑몰 데이터 조회
+        //페이징 처리 된 쇼핑몰 데이터 조회z
         Page<ShoppingMall> shoppingMallPage = shoppingMallRepository.findAllByOverallRatingAndBusinessStatusOrderByMonitoringDateDesc(overallRating, businessStatus, pageable);
 
         //getContent -> 입력받은 page값에 해당하는 데이터 목록을 List형태로 변환

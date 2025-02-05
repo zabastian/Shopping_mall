@@ -39,7 +39,7 @@ public class ShoppingMallController {
 
         Pageable pageable = PageRequest.of(page -1,10);
 
-        List<ShoppingMallDto> shoppingMallDtos = shoppingMallService.shoppingMallSummaryPage(pageable, overallRating, businessStatus);
+        List<ShoppingMallDto> shoppingMallDtos = shoppingMallService.pageShoppingMallSummary(pageable, overallRating, businessStatus);
 
         return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK.toString(), "쇼핑몰 조회 성공", shoppingMallDtos));
     }
