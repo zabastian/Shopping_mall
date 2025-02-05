@@ -6,10 +6,7 @@ import com.example.shopping_mall.shoppingMall.service.ShoppingMallService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -45,6 +42,14 @@ public class ShoppingMallController {
         List<ShoppingMallDto> shoppingMallDtos = shoppingMallService.monitoringDateDescendingOrder();
 
         return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK.toString(), "쇼핑몰 조회 성공",shoppingMallDtos));
+    }
+
+    @PostMapping("/collection")
+    public ResponseEntity<ApiResponse<String>> insertShoppingMallFromCSV() {
+
+        shoppingMallService.insertShoppingMallFromCSV();
+
+        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK.toString(), "CSV 데이터 저장 완료", "success"));
     }
 
 }

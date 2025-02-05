@@ -3,13 +3,21 @@ package com.example.shopping_mall.shoppingMall.service;
 import com.example.shopping_mall.entity.shoppingMall.ShoppingMall;
 import com.example.shopping_mall.shoppingMall.dto.ShoppingMallDto;
 import com.example.shopping_mall.shoppingMall.repository.ShoppingMallRepository;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ShoppingMallService {
@@ -89,5 +97,24 @@ public class ShoppingMallService {
                 .collect(Collectors.toList());
 
         return shoppingMallDtos;
+    }
+
+    private static final String CSV_FILE_PATH = "C:\\Users\\USER\\Downloads\\서울시 인터넷 쇼핑몰 현황.csv";  // 실제 파일 경로로 변경
+
+    public void insertShoppingMallFromCSV() {
+        try (Reader reader = new FileReader(CSV_FILE_PATH)) {
+            CsvToBean<ShoppingMall> csvToBean = new CsvToBeanBuilder<ShoppingMall>(reader)
+                    .withType(ShoppingMall.class)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+            List<ShoppingMall> shoppingMallList = csvToBean.parse();
+
+//            shoppingMallList.stream().forEach(mall -> shoppingMallRepository.save(mall));
+            shoppingMallRepository.saveAll(shoppingMallList);
+
+        } catch (IOException e) {
+            log.error("CSV 파일을 읽는 중 오류 발생", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "CSV 파일을 읽는 중 오류 발생");
+        }
     }
 }
