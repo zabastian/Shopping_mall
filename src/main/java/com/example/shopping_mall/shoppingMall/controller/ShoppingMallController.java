@@ -1,11 +1,9 @@
 package com.example.shopping_mall.shoppingMall.controller;
 
 import com.example.shopping_mall.common.dto.ApiResponse;
-import com.example.shopping_mall.entity.shoppingMall.ShoppingMall;
 import com.example.shopping_mall.shoppingMall.dto.ShoppingMallDto;
 import com.example.shopping_mall.shoppingMall.service.ShoppingMallService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

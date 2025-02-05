@@ -1,13 +1,14 @@
 package com.example.shopping_mall.shoppingMall.service;
 
+
 import com.example.shopping_mall.entity.shoppingMall.ShoppingMall;
 import com.example.shopping_mall.shoppingMall.dto.ShoppingMallDto;
 import com.example.shopping_mall.shoppingMall.repository.ShoppingMallRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.hibernate.query.Page;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.stream.Collectors;
 
