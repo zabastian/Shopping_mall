@@ -108,6 +108,4 @@ varchar(50) withdrawal_shipping_fee
 ## 🖱️ 최적화
 -  [커서 기반 페이지네이션 API 최적화](https://wax-drop-ff7.notion.site/192f00cdce4c80deb078cf3276ea27e2)
 
-![Image](https://github.com/user-attachments/assets/76bf9afb-9106-4295-b7d2-654aa93e53d1)
-
  
