@@ -8,7 +8,8 @@ import java.time.LocalDate;
 @Getter
 @Entity
 @NoArgsConstructor
-@Table(name = "shopping_mall")
+@Table(name = "shopping_mall", indexes =
+        @Index(name = "idx_monitoring_dateANDshopping_mall_id", columnList = "monitoring_date DESC, shopping_mall_id ASC"))
 public class ShoppingMall {
 
     @Id

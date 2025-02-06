@@ -2,10 +2,14 @@ package com.example.shopping_mall.shoppingMall.service;
 
 import com.example.shopping_mall.converter.TypeConverter;
 import com.example.shopping_mall.entity.shoppingMall.ShoppingMall;
+import com.example.shopping_mall.shoppingMall.dto.ShoppingMallCursorInquiryResponseDto;
 import com.example.shopping_mall.shoppingMall.dto.ShoppingMallDto;
+import com.example.shopping_mall.shoppingMall.repository.ShoppingMallQueryRepository;
 import com.example.shopping_mall.shoppingMall.repository.ShoppingMallRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,90 +23,78 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ShoppingMallService {
 
     private final ShoppingMallRepository shoppingMallRepository;
     private final TypeConverter typeConverter;
+    private final ShoppingMallQueryRepository shoppingMallQueryRepository;
 
-    //전체평가 조회
-    public List<ShoppingMallDto> overallRatingInquiry(int overallRating) {
+    // 전체평가 점수 조회 + 업소상태 조회
+    public List<ShoppingMallDto> shoppingMallSummary(
+            Integer overallRating,
+            String businessStatus
+    ) {
 
-        //입력받은 별점 확인
-        if (0 > overallRating || overallRating > 3) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "평가 별점은 최소 0점, 최대 3점입니다.");
-        }
+        // 전체평점과 업소상태로 쇼핑몰 리스트 조회
+        List<ShoppingMall> shoppingMallList
+                = shoppingMallRepository.findAllByOverallRatingAndBusinessStatusOrderByMonitoringDateDesc(overallRating, businessStatus);
 
-        //ShoppingMall 조회
-        List<ShoppingMall> shoppingMallList = shoppingMallRepository.findAllByOverallRating(overallRating);
-
-        // ShoppingMall -> ShoppingMallDto로 변환
-        List<ShoppingMallDto> shoppingMallDtos = shoppingMallList.stream().map(shoppingMall ->
-                        new ShoppingMallDto(
-                                shoppingMall.getShoppingMallId(),
-                                shoppingMall.getBusinessName(),
-                                shoppingMall.getStoreName(),
-                                shoppingMall.getOverallRating(),
-                                shoppingMall.getDomainName(),
-                                shoppingMall.getPhoneNumber(),
-                                shoppingMall.getOperatorEmail(),
-                                shoppingMall.getBusinessStatus(),
-                                shoppingMall.getFirstReportDate(),
-                                shoppingMall.getMonitoringDate()))
-                .collect(Collectors.toList());
+        List<ShoppingMallDto> shoppingMallDtos = shoppingMallList
+                .stream()
+                .map(ShoppingMallDto::convertToDto)
+                .toList();
 
         return shoppingMallDtos;
     }
 
-    //업소 상태 조회
-    public List<ShoppingMallDto> businessStatusInquiry(String businessStatus) {
 
-        List<ShoppingMall> shoppingMallList = shoppingMallRepository.findAllByBusinessStatusOrThrowException(businessStatus);
+    // 전체평가 점수 조회 + 업소상태 조회(페이지네이션 적용)
+    public List<ShoppingMallDto> pageShoppingMallSummary(
+            Pageable pageable,
+            Integer overallRating,
+            String businessStatus
+    ) {
 
-        // ShoppingMall -> ShoppingMallDto로 변환
-        List<ShoppingMallDto> shoppingMallDtos = shoppingMallList.stream().map(shoppingMall ->
-                        new ShoppingMallDto(
-                                shoppingMall.getShoppingMallId(),
-                                shoppingMall.getBusinessName(),
-                                shoppingMall.getStoreName(),
-                                shoppingMall.getOverallRating(),
-                                shoppingMall.getDomainName(),
-                                shoppingMall.getPhoneNumber(),
-                                shoppingMall.getOperatorEmail(),
-                                shoppingMall.getBusinessStatus(),
-                                shoppingMall.getFirstReportDate(),
-                                shoppingMall.getMonitoringDate()))
-                .collect(Collectors.toList());
+        //페이징 처리 된 쇼핑몰 데이터 조회
+        Page<ShoppingMall> shoppingMallPage = shoppingMallRepository.findAllByOverallRatingAndBusinessStatusOrderByMonitoringDateDesc(overallRating, businessStatus, pageable);
+
+        //ShoppingMall -> ShoppingMallDto로 변환
+        List<ShoppingMallDto> shoppingMallDtos = shoppingMallPage.stream()
+                .map(ShoppingMallDto::convertToDto)
+                .toList();
 
         return shoppingMallDtos;
     }
 
-    //모니터링 날짜 내림차순 조회
-    public List<ShoppingMallDto> monitoringDateDescendingOrder() {
 
-        List<ShoppingMall> shoppingMallList = shoppingMallRepository.findAllByOrderByMonitoringDateDesc();
+    // 전체평가 점수 조회 + 업소상태 조회(커서 기반 페이지네이션 적용)
+    public ShoppingMallCursorInquiryResponseDto ShoppingMallRatingAndStatusInquiry(
+            Integer overallRating,
+            String businessStatus,
+            LocalDate cursor,
+            int size) {
 
-        // ShoppingMall -> ShoppingMallDto로 변환
-        List<ShoppingMallDto> shoppingMallDtos = shoppingMallList.stream().map(shoppingMall ->
-                        new ShoppingMallDto(
-                                shoppingMall.getShoppingMallId(),
-                                shoppingMall.getBusinessName(),
-                                shoppingMall.getStoreName(),
-                                shoppingMall.getOverallRating(),
-                                shoppingMall.getDomainName(),
-                                shoppingMall.getPhoneNumber(),
-                                shoppingMall.getOperatorEmail(),
-                                shoppingMall.getBusinessStatus(),
-                                shoppingMall.getFirstReportDate(),
-                                shoppingMall.getMonitoringDate()))
-                .collect(Collectors.toList());
+        //QueryDSL로 데이터 조회
+        List<ShoppingMall> shoppingMallList = shoppingMallQueryRepository.findShoppingMallByRatingAndStatusWithCursor(overallRating, businessStatus, cursor, size);
 
-        return shoppingMallDtos;
+        //ShoppingMall -> ShoppingMallDto로 변환
+//        List<ShoppingMallDto> shoppingMallDtos = convertToDtoList(shoppingMallList);
+
+        List<ShoppingMallDto> shoppingMallDtos = shoppingMallList
+                .stream()
+                .map(ShoppingMallDto::convertToDto)
+                .toList();
+
+        //페이지의 마지막 모니터링 날짜
+        LocalDate lastMonitoringDate = shoppingMallList.get(shoppingMallList.size() - 1).getMonitoringDate();
+
+        return new ShoppingMallCursorInquiryResponseDto(shoppingMallDtos, lastMonitoringDate);
     }
 
     private static final int BATCH_SIZE = 100;
@@ -200,6 +192,3 @@ public class ShoppingMallService {
         }
     }
 }
-
-
-
