@@ -1,14 +1,13 @@
 package com.example.shopping_mall.shoppingMall.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import java.time.LocalDate;
 import java.util.List;
 
-@Getter
-@AllArgsConstructor
-public class ShoppingMallCursorInquiryResponseDto {
+public record ShoppingMallCursorInquiryResponseDto(
+        List<ShoppingMallDto> shoppingMallList,
+        LocalDate nextCursor
+) {
 
-    private List<ShoppingMallDto> shoppingMallList;
-    private LocalDate nextCursor;
+//    private List<ShoppingMallDto> shoppingMallList;
+//    private LocalDate nextCursor;
 }

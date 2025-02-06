@@ -52,7 +52,8 @@ public class ShoppingMallController {
             @RequestParam(value = "rating", required = false) Integer overallRating, //null값 방지 integer
             @RequestParam(value = "status", required = false) String businessStatus,
             @RequestParam(value = "cursor", required = false) LocalDate cursor,
-            @RequestParam(value = "size", defaultValue = "10", required = false) int size) { //size 입력 안할 시 기본 값 10
+            @RequestParam(value = "size", defaultValue = "10", required = false) int size
+    ) { //size 입력 안할 시 기본 값 10
 
         ShoppingMallCursorInquiryResponseDto shoppingMallDtos = shoppingMallService.ShoppingMallRatingAndStatusInquiry(overallRating, businessStatus, cursor, size);
 
