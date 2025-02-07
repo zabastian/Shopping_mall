@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -59,4 +60,14 @@ public class ShoppingMallController {
 
         return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK.toString(), "쇼핑몰 조회 성공", shoppingMallDtos));
     }
+
+    // CSV 파일 저장하기
+    @PostMapping("/collection")
+    public ResponseEntity<ApiResponse<String>> insertShoppingMallFromCSV() throws IOException {
+
+        shoppingMallService.readCsvByBufferedReader();
+
+        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK.toString(), "CSV 데이터 저장 완료", "success"));
+    }
+
 }
