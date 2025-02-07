@@ -27,13 +27,13 @@ CSV 파일을 업로드하여 데이터베이스에 저장할 수 있습니다.
 ## 🧑‍💻 팀원 소개
 | 이름       | 역할   | 담당 업무                  |
 |-----------|--------|-------------------------|
-| 이현우      |  팀장 | PARSING, csv reader 구현| 
+| 이현우      |  팀장 | csv reader 구현| 
 | 송준일      |  팀원 | 리팩토링 및 페이지네이션 구현 | 
-| 김현준      |  팀원 | PARSING, csv reader 구현, 발표| 
+| 김현준      |  팀원 | csv reader 구현, 발표| 
 | 김세희      |  팀원 | 리팩토링 및 페이지네이션 구현| 
-| 이상구      |  팀원 | PARSING, csv reader 구현 | 
+| 이상구      |  팀원 | csv reader 구현 | 
 
-## 🔗 와이어 프레임
+## 🔗 와이어프레임
 [와이어프레임 링크](https://www.figma.com/design/UySlhnO7ms1JIkzTnLWcys/Untitled?node-id=0-1&p=f&t=CYbweDT8ESu0w3OI-0_)
 
 ## 💻 ERD
@@ -102,12 +102,14 @@ MEDIUMTEXT withdrawal_shipping_fee
 | 커서 기반 페이지네이션 적용 리스트 조회| `GET`  | /shopping-mall/status-ratings/cursor-page   | param    | 200 OK |
 | CSV 파일 업로드 및 데이터 저장    | `POST`  | /shopping-mall/collection    |     | 200 OK | 
 
+---
 ## 📜 트러블 슈팅
 - [CSV파일 한글 깨짐 현상](https://wax-drop-ff7.notion.site/CSV-193f00cdce4c80cc810fee84e97d2b42)
 - [‘MysqlDataTruncation’ 오류 해결 과정](https://wax-drop-ff7.notion.site/MysqlDataTruncation-193f00cdce4c8061a26ad1c43691c5d4)
 
 
 ## 🖱️ 최적화
-- [커서 기반 페이지네이션 API 최적화](https://wax-drop-ff7.notion.site/193f00cdce4c8090a796d7e97d7b76a3)
+- [트랜잭션을 통한 최적화](https://wax-drop-ff7.notion.site/193f00cdce4c806287daf25d0c532ab0)
+- [커서 기반 페이지네이션 최적화](https://wax-drop-ff7.notion.site/193f00cdce4c8090a796d7e97d7b76a3)
 
  
