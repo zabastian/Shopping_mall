@@ -104,8 +104,10 @@ varchar(50) withdrawal_shipping_fee
 | CSV 파일 업로드 및 데이터 저장    | `POST`  | /shopping-mall/collection    |     | 200 OK | 
 
 ## 📜 트러블 슈팅
+- [CSV파일 한글 깨짐 현상](https://wax-drop-ff7.notion.site/CSV-193f00cdce4c80cc810fee84e97d2b42)
+
 
 ## 🖱️ 최적화
--  [커서 기반 페이지네이션 API 최적화](https://wax-drop-ff7.notion.site/192f00cdce4c80deb078cf3276ea27e2)
+- [커서 기반 페이지네이션 API 최적화](https://wax-drop-ff7.notion.site/193f00cdce4c8090a796d7e97d7b76a3)
 
  
