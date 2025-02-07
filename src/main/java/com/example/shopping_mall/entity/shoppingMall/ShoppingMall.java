@@ -17,7 +17,7 @@ public class ShoppingMall {
     private Long shoppingMallId;
 
     @Lob
-    @Column(name = "business_name", columnDefinition = "LONGTEXT")
+    @Column(name = "business_name", columnDefinition = "MEDIUMTEXT")
     private String businessName; // 상호
 
     @Lob
@@ -25,7 +25,7 @@ public class ShoppingMall {
     private String storeName; // 쇼핑몰명
 
     @Lob
-    @Column(name = "domain_name", columnDefinition = "LONGTEXT")
+    @Column(name = "domain_name", columnDefinition = "MEDIUMTEXT")
     private String domainName; // 도메인명
 
     @Lob
