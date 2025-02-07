@@ -38,7 +38,7 @@ public class ShoppingMallQueryRepository {
         return jpaQueryFactory //QueryDSL을 이용해서 쿼리를 생성하는 객체
                 .selectFrom(shoppingMall) //shoppingMall테이블에서 데이터를 가져옴
                 .where(booleanBuilder) // 동적으로 생성 된 조건을 적용
-                .orderBy(shoppingMall.monitoringDate.desc()) // 정렬기준
+                .orderBy(shoppingMall.monitoringDate.desc(), shoppingMall.shoppingMallId.asc()) // 정렬기준 모니터링 날짜 내림차순 정렬, 날짜가 겹치는 경우 Id 오름차순 순서대로 정렬
                 .limit(size) // 10개 만큼 결과 조회
                 .fetch(); // 쿼리를 실행해서 결과 리스트를 가져오기
     }
