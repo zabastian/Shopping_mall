@@ -47,40 +47,39 @@ varchar password "password"
 }
 
 shopping_mall {
-bigint shopping_mall_id PK
-varchar(100) privacy_policy
-
-varchar(50) security_server
-int business_info_rating
-varchar(50) business_name
-varchar(50) business_status
-varchar(50) business_type
-varchar(50) certification_marks
-varchar(100) company_address
-varchar(50) customer_complaint_board
-varchar(100) domain_name
-int e_commerce_license
-varchar(50) estimated_delivery_display
-varchar(50) extra_personal_info_request
-date  first_report_date
-varchar(50) main_products
-varchar(50) membership_cancellation
-date monitoring_date
-varchar(100) operator_email
-int overall_rating
-int payment_method_rating
-varchar(100) payment_methods
-varchar(50) phone_number
-int privacy_security_rating
-varchar(50) purchase_safety_service
-varchar(100) required_homepage_info
-int site_establishment_year
-varchar(50) store_name
-varchar(100) terms_compliance
-int terms_of_service_rating
-int withdrawal_policy_rating
-varchar(50) withdrawal_possible
-varchar(50) withdrawal_shipping_fee
+BIGINT shopping_mall_id PK
+INT business_info_rating
+MEDIUMTEXT business_name
+MEDIUMTEXT business_status
+MEDIUMTEXT business_type
+MEDIUMTEXT certification_marks
+MEDIUMTEXT company_address
+MEDIUMTEXT customer_complaint_board
+MEDIUMTEXT domain_name
+VARCHAR(255) e_commerce_license
+MEDIUMTEXT estimated_delivery_display
+MEDIUMTEXT extra_personal_info_request
+DATE  first_report_date
+MEDIUMTEXT main_products
+MEDIUMTEXT membership_cancellation
+DATE monitoring_date
+MEDIUMTEXT operator_email
+INT overall_rating
+INT payment_method_rating
+MEDIUMTEXT payment_methods
+MEDIUMTEXT phone_number
+INT privacy_security_rating
+MEDIUMTEXT security_server
+MEDIUMTEXT privacy_policy
+MEDIUMTEXT purchase_safety_service
+MEDIUMTEXT required_homepage_info
+VARCHAR(255) site_establishment_year
+MEDIUMTEXT store_name
+MEDIUMTEXT terms_compliance
+INT terms_of_service_rating
+INT withdrawal_policy_rating
+MEDIUMTEXT withdrawal_possible
+MEDIUMTEXT withdrawal_shipping_fee
 }
 ```
 ## 📑 API 명세서
