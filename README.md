@@ -105,6 +105,7 @@ varchar(50) withdrawal_shipping_fee
 
 ## 📜 트러블 슈팅
 - [CSV파일 한글 깨짐 현상](https://wax-drop-ff7.notion.site/CSV-193f00cdce4c80cc810fee84e97d2b42)
+- [‘MysqlDataTruncation’ 오류 해결 과정](https://wax-drop-ff7.notion.site/MysqlDataTruncation-193f00cdce4c8061a26ad1c43691c5d4)
 
 
 ## 🖱️ 최적화
