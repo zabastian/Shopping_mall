@@ -36,7 +36,6 @@ public class ShoppingMall {
     @Column(name = "operator_email", columnDefinition = "MEDIUMTEXT")
     private String operatorEmail; // 운영자이메일
 
-    @Lob
     @Column(name = "e_commerce_license")
     private String eCommerceLicense; // 통신판매번호
 
@@ -44,7 +43,6 @@ public class ShoppingMall {
     @Column(name = "business_type", columnDefinition = "MEDIUMTEXT")
     private String businessType; // 영업형태
 
-    @Lob
     @Column(name = "first_report_date")
     private LocalDate firstReportDate; // 최초신고일자
 
@@ -56,27 +54,21 @@ public class ShoppingMall {
     @Column(name = "business_status", columnDefinition = "MEDIUMTEXT")
     private String businessStatus; // 업소상태
 
-    @Lob
     @Column(name = "overall_rating")
     private int overallRating; // 전체평가
 
-    @Lob
     @Column(name = "business_info_rating")
     private int businessInfoRating; // 사업자정보표시평가
 
-    @Lob
     @Column(name = "withdrawal_policy_rating")
     private int withdrawalPolicyRating; // 청약철회평가
 
-    @Lob
     @Column(name = "payment_method_rating ")
     private int paymentMethodRating; // 결재방법평가
 
-    @Lob
     @Column(name = "terms_of_service_rating")
     private int termsOfServiceRating; // 이용약관평가
 
-    @Lob
     @Column(name = "privacy_security_rating")
     private int privacySecurityRating; // 개인정보보안평가
 
@@ -136,11 +128,9 @@ public class ShoppingMall {
     @Column(name = "membership_cancellation", columnDefinition = "MEDIUMTEXT")
     private String membershipCancellation; // 회원탈퇴방법
 
-    @Lob
     @Column(name = "site_establishment_year")
     private String siteEstablishmentYear; // 사이트개설년도
 
-    @Lob
     @Column(name = "monitoring_date")
     private LocalDate monitoringDate; // 모니터링 날짜
 
