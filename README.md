@@ -104,12 +104,6 @@ MEDIUMTEXT withdrawal_shipping_fee
 
 ---
 ## 📜 트러블 슈팅
-- [CSV파일 한글 깨짐 현상](https://wax-drop-ff7.notion.site/CSV-193f00cdce4c80cc810fee84e97d2b42)
-- [‘MysqlDataTruncation’ 오류 해결 과정](https://wax-drop-ff7.notion.site/MysqlDataTruncation-193f00cdce4c8061a26ad1c43691c5d4)
-
-
-## 🖱️ 최적화
-- [트랜잭션을 통한 최적화](https://wax-drop-ff7.notion.site/193f00cdce4c806287daf25d0c532ab0)
-- [커서 기반 페이지네이션 최적화](https://wax-drop-ff7.notion.site/193f00cdce4c8090a796d7e97d7b76a3)
+- https://qlgh2gh.tistory.com/36
 
  
